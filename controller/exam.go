@@ -32,7 +32,7 @@ func (c *Controller) Filter(from, to string) (models.ShopCart, error) {
 
 		fmt.Println(top)
 
-	} // fmt.Println(products.Products)
+	}
 	res := models.ShopCart{}
 	for _, val := range shopCart.Products {
 
@@ -303,7 +303,7 @@ func (c *Controller) ActiveUSer() (string, error) {
 
 	// fmt.Println(ss)
 
-	for i := 0; i < len(top); i++ {
+	for i := 0; i < 1; i++ {
 
 		fmt.Println(top[i])
 

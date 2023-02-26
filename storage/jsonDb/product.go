@@ -122,14 +122,28 @@ func (p *productRepo) GetByID(req *models.ProductPrimaryKey) (models.ProductWith
 	return models.ProductWithCategory{}, errors.New("There is no product with this id")
 }
 
-func (p *productRepo) GetAll() (models.GetListProduct, error) {
-	products, err := p.Read()
+
+func (p *productRepo) GetAllProduct(req *models.GetListRequestProduct) (models.GetListResponseProduct, error) {
+	products, err := p.ReadWithCategory()
 	if err != nil {
-		return models.GetListProduct{}, err
+		return models.GetListResponseProduct{}, err
 	}
-	return models.GetListProduct{
-		Products: products,
-		Count:    len(products),
+
+	fProduct := []models.ProductWithCategory{}
+	for i := 0; i < len(products); i++ {
+		if products[i].CategoryID == req.CategoryID {
+			fProduct = append(fProduct, products[i])
+		}
+	}
+
+	if req.Limit+req.Offset > len(fProduct) {
+		return models.GetListResponseProduct{}, errors.New("out of range")
+	}
+
+	fProduct = fProduct[req.Offset : req.Offset+req.Limit]
+	return models.GetListResponseProduct{
+		Products: fProduct,
+		Count:    len(fProduct),
 	}, nil
 }
 

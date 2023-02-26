@@ -47,6 +47,7 @@ func (s *shopCartRepo) AddShopCart(req *models.Add) (string, error) {
 		UserId:    req.UserId,
 		Count:     req.Count,
 		Status:    false,
+		// Time:      req.Time,
 	})
 
 	body, err := json.MarshalIndent(shopCarts, "", " ")
@@ -134,4 +135,15 @@ func (s *shopCartRepo) UpdateShopCart(userId string) error {
 		return err
 	}
 	return nil
+}
+
+func (p *shopCartRepo) GetAll() (models.GetListResponsePro, error) {
+	products, err := p.Read()
+	if err != nil {
+		return models.GetListResponsePro{}, err
+	}
+	return models.GetListResponsePro{
+		Products: products,
+		Count:    len(products),
+	}, nil
 }

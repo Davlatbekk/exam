@@ -45,10 +45,10 @@ func (c *Controller) GetByIdProduct(req *models.ProductPrimaryKey) (models.Produ
 	}, nil
 }
 
-func (c *Controller) GetAllProduct() (models.GetListProduct, error) {
-	products, err := c.store.Product().GetAll()
+func (c *Controller) GetAllProduct(req *models.GetListRequestProduct) (models.GetListResponseProduct, error) {
+	products, err := c.store.Product().GetAllProduct(req)
 	if err != nil {
-		return models.GetListProduct{}, err
+		return models.GetListResponseProduct{}, err
 	}
 	return products, nil
 }

@@ -11,6 +11,8 @@ type Store struct {
 	shopCart   *shopCartRepo
 	commission *commissionRepo
 	category   *categoryRepo
+	order      *orderRepo
+	branch     *branchRepo
 }
 
 func NewFileJson(cfg *config.Config) (storage.StorageI, error) {
@@ -20,6 +22,8 @@ func NewFileJson(cfg *config.Config) (storage.StorageI, error) {
 		shopCart:   NewShopCartRepo(cfg.ShopCartFileName),
 		commission: NewCommissionRepo(cfg.CommissionFileName),
 		category:   NewCategoryRepo(cfg.CategoryName),
+		order:      NewOrderRepo(cfg.OrderName),
+		branch:     NewBranchRepo(cfg.BranchName),
 	}, nil
 }
 
@@ -43,4 +47,12 @@ func (s *Store) Commission() storage.CommissionRepoI {
 
 func (s *Store) Category() storage.CategoryRepoI {
 	return s.category
+}
+
+func (s *Store) Order() storage.OrderRepoI {
+	return s.order
+}
+
+func (s *Store) Branch() storage.BranchRepoI {
+	return s.branch
 }

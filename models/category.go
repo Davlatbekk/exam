@@ -4,7 +4,7 @@ type Category struct {
 	Id            string     `json:"id"`
 	Name          string     `json:"name"`
 	ParentID      string     `json:"parent_id"`
-	SubCategories []Category `json:"sub_categories"`
+	// SubCategories []Category `json:"sub_categories"`
 }
 
 type CategoryPrimaryKey struct {

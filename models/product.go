@@ -30,7 +30,15 @@ type UpdateProduct struct {
 	CategoryID string  `json:"category_id"`
 }
 
-type GetListProduct struct {
-	Count    int       `json:"count"`
-	Products []Product `json:"products"`
+type GetListResponseProduct struct {
+	Count    int                   `json:"count"`
+	Products []ProductWithCategory `json:"products"`
+}
+
+
+
+type GetListRequestProduct struct {
+	Offset     int    `json:"offset"`
+	Limit      int    `json:"limit"`
+	CategoryID string `json:"category_id"`
 }
